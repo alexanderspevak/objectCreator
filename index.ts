@@ -5,8 +5,7 @@ const objectCreator =(objectMap: string[], startObject = {}) => {
     startObject[key] = null
     return startObject
   }
-  const nextLevelMap = [...objectMap]
-  nextLevelMap.shift()
+  const [, ...nextLevelMap] = objectMap
   startObject[key] = objectCreator(nextLevelMap, startObject[key])
 
   return startObject
