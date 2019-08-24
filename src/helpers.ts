@@ -1,30 +1,45 @@
-import { IMappedObject } from './types'
+import { IMappedObject, IHTTPMethod } from './types'
 
-export const createObjectFromFields = (maps: string[]) => {
-  const splitMaps = transormMapsToArray(maps)
+export const createObjectFromFields = (fields: string[]): IMappedObject => {
+  const splitFields = transformFieldsToArrays(fields)
 
-  return splitMaps.reduce((obj:IMappedObject, currentMap: string[]):IMappedObject => {
-    return createObject(currentMap, obj)
+  return splitFields.reduce((object: IMappedObject, currentField: string[]): IMappedObject => {
+    return createObject(currentField, object)
   }, {})
 }
 
-const transormMapsToArray = (maps: string[]): string[][] => {
-  return maps.map((mapString:string) => {
-    return mapString.split('.')
+const transformFieldsToArrays = (fields: string[]): string[][] => {
+  return fields.map((fieldString: string) => {
+    return fieldString.split('.')
   })
 }
 
-const createObject = (objectMap: string[], startObject = {}) => {
-  const depth = objectMap.length
-  const [key] = objectMap
+const createObject = (objectFields: string[], startObject: IMappedObject = {}) => {
+  const depth = objectFields.length
+  const [key] = objectFields
 
   if (depth === 1) {
     startObject[key] = null
     return startObject
   }
 
-  const [, ...nextLevelMap] = objectMap
-  startObject[key] = createObject(nextLevelMap, startObject[key])
+  const [, ...nextLevelMap] = objectFields
+  startObject[key] = createObject(nextLevelMap, startObject[key] || undefined)
 
   return startObject
+}
+
+export const checkHTTPMethod = (method: string| undefined): IHTTPMethod => {
+  if (method &&
+    (
+      method === 'POST' ||
+      method === 'GET' ||
+      method === 'DELETE' ||
+      method === 'PUT'
+    )
+  ) {
+    return method
+  }
+
+  return false
 }

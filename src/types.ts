@@ -9,3 +9,5 @@ export interface IRoute {
 }
 
 export type IHandler = (req:IncomingMessage, res: ServerResponse) => void | ServerResponse
+
+export type IHTTPMethod = false | 'GET' | 'POST' | 'DELETE' | 'PUT'

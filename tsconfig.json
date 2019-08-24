@@ -1,33 +1,29 @@
 {
+  "version": "2.1.1",
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "dist",
-    "target": "es2017",
-    "lib": [
-      "es2017", "dom"
-    ],
-    "moduleResolution": "node",
-    "allowJs": true,
-    "noEmit": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "lib": [ "dom", "es2017", "es5", "es6", "es2016"],
+    "outDir": "dist",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "importHelpers": true,
     "emitDecoratorMetadata": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "declaration": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "stripInternal": true,
+    "pretty": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "downlevelIteration": true
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
-    "tmp",
-    "temp",
     "dist",
     "node_modules"
   ]

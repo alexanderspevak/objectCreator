@@ -1,20 +1,28 @@
 import { createServer } from 'http'
 import { INVALID_ROUTE } from './constants'
 import { Router } from './Router'
+import { checkHTTPMethod } from './helpers'
 
 export class Server {
   routes: Router
 
-  applyRoutes (routes) {
+  applyRoutes = (routes: Router) => {
     this.routes = routes
   }
 
-  listen (port: number) {
+  listen = (port: number) => {
     createServer((req, res) => {
       const { url, method } = req
+      const checkedMethod = checkHTTPMethod(method)
 
-      if (this.routes[method] && this.routes[method][url]) {
-        return this.routes[method][url](req, res)
+      if (
+        checkedMethod &&
+          checkHTTPMethod(checkedMethod) &&
+          url &&
+          this.routes[checkedMethod] &&
+          this.routes[checkedMethod][url]
+      ) {
+        return this.routes[checkedMethod][url](req, res)
       }
 
       res.writeHead(400)

@@ -1,13 +1,13 @@
 import { IHandler, IRoute } from './types'
 
 export class Router {
-  GET: IRoute = {}
+  public GET: IRoute = {}
 
-  POST: IRoute = {}
+  public POST: IRoute = {}
 
-  PUT: IRoute = {}
+  public PUT: IRoute = {}
 
-  DELETE: IRoute = {}
+  public DELETE: IRoute = {}
 
   get (path: string, handler: IHandler) {
     this.GET[path] = handler
@@ -26,4 +26,4 @@ export class Router {
   }
 }
 
-export const router = new Router()
+export const router:any = new Router()
