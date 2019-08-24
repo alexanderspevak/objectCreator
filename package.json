@@ -9,7 +9,9 @@
     "build": "node node_modules/typescript/lib/tsc",
     "watch": "node node_modules/typescript/lib/tsc -w",
     "eslint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
-    "eslint:fix": "./node_modules/.bin/eslint --fix . --ext '.js,.jsx,.ts,.tsx' ."
+    "eslint:fix": "./node_modules/.bin/eslint --fix . --ext '.js,.jsx,.ts,.tsx' .",
+    "docker:build": "docker build -t objectcreator .",
+    "docker:start": "npm run docker:build && docker run -p 8000:8000 -t -i objectcreator"
   },
   "author": "",
   "license": "ISC",
